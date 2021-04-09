@@ -7,17 +7,18 @@ orbs:
   continuation: circleci/continuation@0.1.2
 
 executors:
-  docker:
-    - image: cimg/base:stable
+  base:
+    docker:
+      - image: cimg/base:stable
 
 jobs:
   run_some_checks:
-    executor: docker
+    executor: base
     steps:
       - checkout
 
   prepare_for_next:
-    executor: docker
+    executor: base
     steps:
       - checkout
       - run:
