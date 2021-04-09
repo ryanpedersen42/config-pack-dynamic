@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Set Version
           command: |
-            echo "version: 2.1" >> continue_config.yml
+            echo "version: 2.1" >> continue-config.yml
       - run:
           name: Create Config
           command: |
