@@ -5,6 +5,7 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
   continuation: circleci/continuation@0.1.2
+  circleci-cli: circleci/circleci-cli@0.1.9
 
 executors:
   base:
@@ -21,6 +22,7 @@ jobs:
     executor: base
     steps:
       - checkout
+      - circleci-cli/install
       - run:
           name: Set Version
           command: |
