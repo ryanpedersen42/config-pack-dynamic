@@ -38,8 +38,6 @@ jobs:
           # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
-            front_test=`cat /tmp/pipeline-parameters.json | jq .build-front`
-            back_test=`cat /tmp/pipeline-parameters.json | jq .build-back`
             cat /tmp/pipeline-parameters.json | if jq .build-front;
               then 
                 echo "equal"
