@@ -54,7 +54,7 @@ jobs:
               resource_size = 'large'
             else:
               resource_size = 'small'
-            params.update({'default-resource-class': resource_size, 'resource_size': 'small', 'last_one', 'test'})
+            params.update({'default-resource-class': resource_size, 'resource_size': 'small', 'last_one': 'test'})
             with open(param_path, 'w') as fp: 
                 fp.write(json.dumps(params))
           shell: /usr/bin/env python3
