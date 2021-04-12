@@ -38,7 +38,7 @@ jobs:
           # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
-            cat /tmp/pipeline-parameters.json | if jq .build-front;
+            cat /tmp/pipeline-parameters.json | if jq ."build-front";
               then 
                 echo "equal"
                 directory_choice=secondary
@@ -46,7 +46,7 @@ jobs:
                 echo "no front end"
             fi
 
-            cat /tmp/pipeline-parameters.json | if jq .build-back;
+            cat /tmp/pipeline-parameters.json | if jq ."build-back";
               then 
                 echo "equal"
                 directory_choice=primary
