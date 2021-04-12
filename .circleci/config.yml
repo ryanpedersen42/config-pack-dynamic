@@ -55,7 +55,7 @@ jobs:
               echo "not changed"
             fi
                     
-            echo '$DIRECTORY_CHOICE'
+            echo $DIRECTORY_CHOICE
             echo 'export DIRECTORY="$DIRECTORY_CHOICE"' >> $BASH_ENV
       - run:
           name: Set Version
