@@ -38,8 +38,8 @@ jobs:
           # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
-            front_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-front"`
-            back_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-back"`
+            front_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-front"'`
+            back_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-back"'`
 
             if [ "$front_check" = "true"]; then
               echo "front changed"
