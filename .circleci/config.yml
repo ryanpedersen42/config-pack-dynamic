@@ -19,7 +19,7 @@ jobs:
       - checkout
 
   prepare_for_next:
-    executor: base
+    executor: path-filtering/default
     steps:
       - checkout
       - circleci-cli/install
