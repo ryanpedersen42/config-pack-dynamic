@@ -22,7 +22,6 @@ jobs:
     executor: path-filtering/default
     steps:
       - checkout
-      - 
       - circleci-cli/install
       - path-filtering/set-parameters:
           base-revision: << pipeline.git.base_revision >>
