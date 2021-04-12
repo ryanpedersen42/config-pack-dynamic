@@ -57,8 +57,7 @@ jobs:
             params.update({'default-resource-class': resource_size})
             with open(param_path, 'w') as fp: 
                 fp.write(json.dumps(params))
-            echo `{ "resource_size": "'"$RESOURCE_SIZE"'", "test_var": "testing" }` >> continue.json
-
+            cat /tmp/pipeline-parameters.json
           shell: /usr/bin/env python3
       - continuation/continue:
           configuration_path: ./continue-config.yml
