@@ -47,7 +47,6 @@ jobs:
             import json
 
             branch = '<< pipeline.git.branch >>'
-
             param_path = '/tmp/pipeline-parameters.json'
             with open(param_path, 'r') as param_file:
               params = json.load(param_file)
@@ -58,9 +57,12 @@ jobs:
             params.update({'default-resource-class': resource_size})
             with open(param_path, 'w') as fp: 
                 fp.write(json.dumps(params))
+            echo `{ "resource_size": "'"$RESOURCE_SIZE"'", "test_var": "testing" }` >> continue.json
+
           shell: /usr/bin/env python3
       - continuation/continue:
           configuration_path: ./continue-config.yml
+          parameters: ./continue.json
 
 workflows:
   setup-workflow:
