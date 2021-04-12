@@ -31,7 +31,7 @@ jobs:
       - run: cat /tmp/pipeline-parameters.json
       - run:
           name: Set Version
-          command: |
+          command: | 
             echo "version: 2.1" >> continue-config.yml
       - run:
           name: Create Config
@@ -41,7 +41,7 @@ jobs:
           name: Validate Config
           command: |
             circleci config validate continue-config.yml
-      - path-filtering/set-parameters
+      # - path-filtering/set-parameters
       - run:
           name: Set resource class setting
           command: |
