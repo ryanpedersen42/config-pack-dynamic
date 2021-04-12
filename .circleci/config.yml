@@ -58,10 +58,12 @@ jobs:
           name: Set Version
           command: | 
             echo "version: 2.1" >> continue-config.yml
+      - run: echo $DIRECTORY
       - run:
           name: Create Config
           command: |
             circleci config pack .circleci/${DIRECTORY} >> continue-config.yml
+      - run: cat continue-config.yml
       - run:
           name: Validate Config
           command: |
