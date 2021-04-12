@@ -38,21 +38,20 @@ jobs:
           # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
-            cat /tmp/pipeline-parameters.json | if jq ."build-front";
-              then 
-                echo "equal"
-                directory_choice=secondary
-              else  
-                echo "no front end"
-            fi
+            front_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-front"`
+            back_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-back"`
 
-            cat /tmp/pipeline-parameters.json | if jq ."build-back";
-              then 
-                echo "equal"
-                directory_choice=primary
-              else  
-                echo "no front end"
-            fi
+            if [ "$front_check" = "true"]; then
+              echo "front changed"
+              directory_choice=secondary
+            else
+              echo "not changed"
+
+            if [ "$back_check" = "true"]; then
+              echo "back changed"
+              directory_choice=primary
+            else
+              echo "not changed"
                     
             echo $directory_choice
             echo 'export DIRECTORY=$directory_choice' >> $BASH_ENV
