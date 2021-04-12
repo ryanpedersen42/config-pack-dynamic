@@ -57,8 +57,9 @@ jobs:
             params.update({'default-resource-class': resource_size})
             with open(param_path, 'w') as fp: 
                 fp.write(json.dumps(params))
-            cat /tmp/pipeline-parameters.json
           shell: /usr/bin/env python3
+      - run: cat /tmp/pipeline-parameters.json
+
       - continuation/continue:
           configuration_path: ./continue-config.yml
           parameters: ./continue.json
