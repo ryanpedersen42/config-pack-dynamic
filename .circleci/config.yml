@@ -53,8 +53,8 @@ jobs:
             else
               echo "not changed"
                     
-            echo $directory_choice
-            echo 'export DIRECTORY=$directory_choice' >> $BASH_ENV
+            echo '$directory_choice'
+            echo 'export DIRECTORY="$directory_choice"' >> $BASH_ENV
       - run:
           name: Set Version
           command: | 
