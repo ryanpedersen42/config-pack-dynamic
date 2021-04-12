@@ -46,12 +46,14 @@ jobs:
               directory_choice=secondary
             else
               echo "not changed"
+            fi
 
             if [ "$back_check" = "true"]; then
               echo "back changed"
               directory_choice=primary
             else
               echo "not changed"
+            fi
                     
             echo '$directory_choice'
             echo 'export DIRECTORY="$directory_choice"' >> $BASH_ENV
