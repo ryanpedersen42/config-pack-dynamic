@@ -43,18 +43,19 @@ jobs:
             
             if [[ "$front_test" == 'true' ]]; then
               echo "equal"
-              echo 'export DIRECTORY="secondary"' >> $BASH_ENV
+              directory_choice=secondary
             else
               echo "not equal"
             fi
 
             if [[ "$back_test" == 'true' ]]; then
               echo "equal"
-              echo 'export DIRECTORY="primary"' >> $BASH_ENV
+              directory_choice=primary
             else
               echo "not equal"
             fi
-
+            echo $directory_choice
+            echo 'export DIRECTORY=$directory_choice' >> $BASH_ENV
       - run:
           name: Set Version
           command: | 
