@@ -22,7 +22,14 @@ jobs:
     executor: path-filtering/default
     steps:
       - checkout
+      - 
       - circleci-cli/install
+      - path-filtering/set-parameters:
+          base-revision: << pipeline.git.base_revision >>
+          mapping: |
+            front/.* build-front true
+            back/.* build-back true
+      - run: cat /tmp/pipeline-parameters.json
       - run:
           name: Set Version
           command: |
@@ -35,11 +42,6 @@ jobs:
           name: Validate Config
           command: |
             circleci config validate continue-config.yml
-      # - run:
-      #     name: Install jq
-      #     command: |
-      #       if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
-      #       $SUDO apt-get update && $SUDO apt-get install -y jq
       - path-filtering/set-parameters
       - run:
           name: Set resource class setting
