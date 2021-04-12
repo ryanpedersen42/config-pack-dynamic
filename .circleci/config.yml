@@ -30,18 +30,42 @@ jobs:
             back/.* build-back true
       - run: cat /tmp/pipeline-parameters.json
       - run:
+          name: Install jq
+          command: |
+            if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
+            $SUDO apt-get update && $SUDO apt-get install -y jq
+      - run: 
+          name: Run conditionals 
+          command: |
+            string1=`cat /tmp/pipeline-parameters.json | jq .front`
+            string2=`cat /tmp/pipeline-parameters.json | jq .back`
+
+            if [[ "$string1" == 'true' ]]; then
+              echo "equal"
+              echo 'export DIRECTORY="secondary"' >> $BASH_ENV
+            else
+              echo "not equal"
+            fi
+
+            if [[ "$string2" == 'true' ]]; then
+              echo "equal"
+              echo 'export DIRECTORY="primary"' >> $BASH_ENV
+            else
+              echo "not equal"
+            fi
+
+      - run:
           name: Set Version
           command: | 
             echo "version: 2.1" >> continue-config.yml
       - run:
           name: Create Config
           command: |
-            circleci config pack .circleci/primary >> continue-config.yml
+            circleci config pack .circleci/${DIRECTORY} >> continue-config.yml
       - run:
           name: Validate Config
           command: |
             circleci config validate continue-config.yml
-      # - path-filtering/set-parameters
       - run:
           name: Set resource class setting
           command: |
