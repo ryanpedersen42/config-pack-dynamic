@@ -40,20 +40,22 @@ jobs:
           command: |
             front_test=`cat /tmp/pipeline-parameters.json | jq .build-front`
             back_test=`cat /tmp/pipeline-parameters.json | jq .build-back`
-            
-            if [[ "$front_test" == 'true' ]]; then
-              echo "equal"
-              directory_choice=secondary
-            else
-              echo "not equal"
+            cat /tmp/pipeline-parameters.json | if jq .build-front;
+              then 
+                echo "equal"
+                directory_choice=secondary
+              else  
+                echo "no front end"
             fi
 
-            if [[ "$back_test" == 'true' ]]; then
-              echo "equal"
-              directory_choice=primary
-            else
-              echo "not equal"
+            cat /tmp/pipeline-parameters.json | if jq .build-back;
+              then 
+                echo "equal"
+                directory_choice=primary
+              else  
+                echo "no front end"
             fi
+                    
             echo $directory_choice
             echo 'export DIRECTORY=$directory_choice' >> $BASH_ENV
       - run:
