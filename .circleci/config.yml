@@ -45,7 +45,9 @@ jobs:
           name: Set resource class setting
           command: |
             import json
-            
+
+            branch = '<< pipeline.git.branch >>'
+
             param_path = '/tmp/pipeline-parameters.json'
             with open(param_path, 'r') as param_file:
               params = json.load(param_file)
