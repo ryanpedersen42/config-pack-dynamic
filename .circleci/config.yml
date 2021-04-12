@@ -50,7 +50,7 @@ jobs:
 
             if [ "$back_check" = "true" ]; then
               echo "back changed"
-              DIRECTORY_CHOICE=primary
+              export DIRECTORY_CHOICE=primary
             else
               echo "not changed"
             fi
