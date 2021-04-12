@@ -35,19 +35,20 @@ jobs:
             if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
             $SUDO apt-get update && $SUDO apt-get install -y jq
       - run: 
+          # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
-            string1=`cat /tmp/pipeline-parameters.json | jq .front`
-            string2=`cat /tmp/pipeline-parameters.json | jq .back`
-
-            if [[ "$string1" == 'true' ]]; then
+            front_test=`cat /tmp/pipeline-parameters.json | jq .front`
+            back_test=`cat /tmp/pipeline-parameters.json | jq .back`
+            
+            if [[ "$front_test" == 'true' ]]; then
               echo "equal"
               echo 'export DIRECTORY="secondary"' >> $BASH_ENV
             else
               echo "not equal"
             fi
 
-            if [[ "$string2" == 'true' ]]; then
+            if [[ "$back_test" == 'true' ]]; then
               echo "equal"
               echo 'export DIRECTORY="primary"' >> $BASH_ENV
             else
@@ -62,7 +63,7 @@ jobs:
       - run:
           name: Create Config
           command: |
-            circleci config pack .circleci/${DIRECTORY} >> continue-config.yml
+            circleci config pack .circleci/primary >> continue-config.yml
       - run: cat continue-config.yml
       - run:
           name: Validate Config
