@@ -35,6 +35,27 @@ jobs:
           name: Validate Config
           command: |
             circleci config validate continue-config.yml
+      # - run:
+      #     name: Install jq
+      #     command: |
+      #       if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
+      #       $SUDO apt-get update && $SUDO apt-get install -y jq
+      - run:
+          name: Set resource class setting
+          command: |
+            import json
+            
+            param_path = '/tmp/pipeline-parameters.json'
+            with open(param_path, 'r') as param_file:
+              params = json.load(param_file)
+            if branch == 'main':
+              resource_size = 'large'
+            else:
+              resource_size = 'small'
+            params.update({'default-resource-class': resource_size})
+            with open(param_path, 'w') as fp: 
+                fp.write(json.dumps(params))
+          shell: /usr/bin/env python3
       - continuation/continue:
           configuration_path: ./continue-config.yml
 

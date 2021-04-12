@@ -1,2 +1,8 @@
 jobs:
   - hello
+  - its:
+      requires: 
+       - hello
+  - me:
+      requires:
+        - its

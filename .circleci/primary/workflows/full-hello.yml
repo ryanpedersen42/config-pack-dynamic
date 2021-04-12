@@ -1,0 +1,3 @@
+when: << pipeline.parameters.full >>
+jobs:
+  - hello 

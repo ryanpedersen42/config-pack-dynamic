@@ -1,13 +1,13 @@
 description: >
-  This job always runs first
+  alternate job run to you
 
 executor: default
 
 parameters:
   to:
     type: string
-    default: "World"
+    default: "you"
     description: "Hello to whom?"
 steps:
   - greet:
-      to: << parameters.to >>
+      to: << parameters.to >> 

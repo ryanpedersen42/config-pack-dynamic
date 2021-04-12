@@ -1,12 +1,12 @@
 description: >
   This job always runs first
 
-executor: default
+executor: dynamic
 
 parameters:
   to:
     type: string
-    default: "World"
+    default: "me"
     description: "Hello to whom?"
 steps:
   - greet:
