@@ -2,9 +2,9 @@ description: >
   This is a sample executor using Docker and Node.
 docker:
   - image: 'cimg/base'
-resource_class: '<<pipeline.parameters.resource_class_size>>'
+resource_class: '<<pipeline.parameters.resource_size>>'
 parameters:
-  resource_class_size:
+  resource_size:
     default: medium
     description: >
       size of the resource class to use
