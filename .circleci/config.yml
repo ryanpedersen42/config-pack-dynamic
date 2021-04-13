@@ -68,6 +68,14 @@ jobs:
           name: check envar
           command: |
             source $BASH_ENV
+            echo $DIRECTORY
+            echo '-----------'
+            echo ${DIRECTORY}
+      - run: 
+          name: check envar
+          command: |
+            echo $DIRECTORY
+            echo '----------'
             echo ${DIRECTORY}
       - run:
           name: Create Config
