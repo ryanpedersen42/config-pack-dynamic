@@ -57,6 +57,7 @@ jobs:
                     
             echo $DIRECTORY_CHOICE
             echo 'export DIRECTORY="$DIRECTORY_CHOICE"' >> $BASH_ENV
+            source $BASH_ENV
 
             echo $DIRECTORY
       - run:
@@ -73,23 +74,23 @@ jobs:
           name: Validate Config
           command: |
             circleci config validate continue-config.yml
-      # - run:
-      #     name: Set resource class setting
-      #     command: |
-      #       import json
+      - run:
+          name: Set resource class setting
+          command: |
+            import json
 
-      #       branch = '<< pipeline.git.branch >>'
-      #       param_path = '/tmp/pipeline-parameters.json'
-      #       with open(param_path, 'r') as param_file:
-      #         params = json.load(param_file)
-      #       if branch == 'main':
-      #         resource_size = 'large'
-      #       else:
-      #         resource_size = 'small'
-      #       params.update({'default-resource-class': resource_size, 'resource_size': 'small', 'last_one': 'test'})
-      #       with open(param_path, 'w') as fp: 
-      #           fp.write(json.dumps(params))
-      #     shell: /usr/bin/env python3
+            branch = '<< pipeline.git.branch >>'
+            param_path = '/tmp/pipeline-parameters.json'
+            with open(param_path, 'r') as param_file:
+              params = json.load(param_file)
+            if branch == 'main':
+              resource_size = 'large'
+            else:
+              resource_size = 'small'
+            params.update({'default-resource-class': resource_size, 'resource_size': 'small', 'last_one': 'test'})
+            with open(param_path, 'w') as fp: 
+                fp.write(json.dumps(params))
+          shell: /usr/bin/env python3
       - run: cat /tmp/pipeline-parameters.json
 
       - continuation/continue:
