@@ -64,7 +64,11 @@ jobs:
           name: Set Version
           command: | 
             echo "version: 2.1" >> continue-config.yml
-      - run: echo ${DIRECTORY}
+      - run: 
+          name: check envar
+          command: |
+            source $BASH_ENV
+            echo ${DIRECTORY}
       - run:
           name: Create Config
           command: |
