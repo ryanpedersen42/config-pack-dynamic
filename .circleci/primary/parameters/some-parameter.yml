@@ -1,2 +1,2 @@
-type: boolean
+type: string
 default: false
