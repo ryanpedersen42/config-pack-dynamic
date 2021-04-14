@@ -59,6 +59,7 @@ jobs:
             exporter="export DIRECTORY=$DIRECTORY_CHOICE"
             echo $exporter >> $BASH_ENV
             echo $DIRECTORY_CHOICE
+
       - run:
           name: Set Version
           command: | 
@@ -67,7 +68,7 @@ jobs:
       - run:
           name: Create Config
           command: |
-            circleci config pack .circleci/primary >> continue-config.yml
+            circleci config pack .circleci/$DIRECTORY >> continue-config.yml
       - run: cat continue-config.yml
       - run:
           name: Validate Config
