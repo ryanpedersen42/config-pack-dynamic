@@ -35,11 +35,12 @@ jobs:
             if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
             $SUDO apt-get update && $SUDO apt-get install -y jq
       - run: 
-          # to-do.. get these variables to bash_env
           name: Run conditionals 
           command: |
             front_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-front"'`
             back_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-back"'`
+            
+            export DIRECTORY_CHOICE=alt
 
             if [ "$front_check" = "true" ]; then
               echo "front changed"
@@ -54,24 +55,14 @@ jobs:
             else
               echo "not changed"
             fi
-                    
-            echo $DIRECTORY_CHOICE
-            echo "-----------"
 
             exporter="export DIRECTORY=$DIRECTORY_CHOICE"
             echo $exporter >> $BASH_ENV
-            echo "-----------"
-
+            echo $DIRECTORY_CHOICE
       - run:
           name: Set Version
           command: | 
             echo "version: 2.1" >> continue-config.yml
-      - run: 
-          name: check envar
-          command: |
-            echo $DIRECTORY
-            echo '-----------'
-            echo ${DIRECTORY}
 
       - run:
           name: Create Config
