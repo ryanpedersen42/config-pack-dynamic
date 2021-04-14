@@ -35,7 +35,7 @@ jobs:
             if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
             $SUDO apt-get update && $SUDO apt-get install -y jq
       - run: 
-          name: Run conditionals 
+          name: Run checks and specify which config to build 
           command: |
             front_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-front"'`
             back_check=`cat /tmp/pipeline-parameters.json | jq -r '."build-back"'`
@@ -60,12 +60,12 @@ jobs:
             echo $exporter >> $BASH_ENV
 
       - run:
-          name: Set Version
+          name: Set version at top of config
           command: | 
             echo "version: 2.1" >> continue-config.yml
 
       - run:
-          name: Create Config
+          name: Create config
           command: |
             circleci config pack .circleci/$DIRECTORY >> continue-config.yml
       - run: cat continue-config.yml
