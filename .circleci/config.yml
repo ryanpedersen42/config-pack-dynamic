@@ -59,7 +59,7 @@ jobs:
 
             echo "exporting dir"
             echo "-----------"
-            echo 'export DIRECTORY="$DIRECTORY_CHOICE"' >> $BASH_ENV
+            echo 'export DIRECTORY=$DIRECTORY_CHOICE' >> $BASH_ENV
             
             source $BASH_ENV
 
@@ -74,7 +74,6 @@ jobs:
       - run: 
           name: check envar
           command: |
-            source $BASH_ENV
             echo $DIRECTORY
             echo '-----------'
             echo ${DIRECTORY}
