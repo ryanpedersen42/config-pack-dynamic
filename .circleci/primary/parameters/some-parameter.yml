@@ -1,2 +1,2 @@
 type: string
-default: false
+default: 'none'
