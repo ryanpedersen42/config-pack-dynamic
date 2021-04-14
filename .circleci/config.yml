@@ -44,14 +44,14 @@ jobs:
 
             if [ "$front_check" = "true" ]; then
               echo "front changed"
-              export DIRECTORY_CHOICE=secondary
+              export DIRECTORY_CHOICE=front
             else
               echo "not changed"
             fi
 
             if [ "$back_check" = "true" ]; then
               echo "back changed"
-              export DIRECTORY_CHOICE=primary
+              export DIRECTORY_CHOICE=back
             else
               echo "not changed"
             fi
