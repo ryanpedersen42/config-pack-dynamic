@@ -56,17 +56,12 @@ jobs:
             fi
                     
             echo $DIRECTORY_CHOICE
-
-            echo "exporting dir"
             echo "-----------"
-            echo 'export DIRECTORY=$DIRECTORY_CHOICE' >> $BASH_ENV
-            
-            source $BASH_ENV
 
-            echo $DIRECTORY
+            exporter="export DIRECTORY=$DIRECTORY_CHOICE"
+            echo $exporter >> $BASH_ENV
+            echo "-----------"
 
-            echo "exporting other var"
-            echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
       - run:
           name: Set Version
           command: | 
@@ -77,15 +72,7 @@ jobs:
             echo $DIRECTORY
             echo '-----------'
             echo ${DIRECTORY}
-      - run:
-          name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
-      - run: 
-          name: check envar
-          command: |
-            echo $DIRECTORY
-            echo '----------'
-            echo ${DIRECTORY}
+
       - run:
           name: Create Config
           command: |
