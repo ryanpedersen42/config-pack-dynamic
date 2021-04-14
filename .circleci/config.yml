@@ -58,7 +58,6 @@ jobs:
 
             exporter="export DIRECTORY=$DIRECTORY_CHOICE"
             echo $exporter >> $BASH_ENV
-            echo $DIRECTORY_CHOICE
 
       - run:
           name: Set Version
