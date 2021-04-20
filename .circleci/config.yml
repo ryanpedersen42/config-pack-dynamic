@@ -91,7 +91,6 @@ jobs:
                 fp.write(json.dumps(params))
           shell: /usr/bin/env python3
       - run: cat /tmp/pipeline-parameters.json
-      - run: exit 1
 
       - continuation/continue:
           configuration_path: ./continue-config.yml
